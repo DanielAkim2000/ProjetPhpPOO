@@ -1,0 +1,16 @@
+{
+    "name": "akimemane/ecf",
+    "autoload": {
+        "psr-4": {
+            "Akimemane\\Ecf\\": "src/",
+            "Router\\": "routes/"
+        }
+    },
+    "authors": [
+        {
+            "name": "DanielAkim2000",
+            "email": "emanedanielakim@gmail.com"
+        }
+    ],
+    "require": {}
+}
