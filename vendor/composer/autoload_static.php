@@ -13,7 +13,7 @@ class ComposerStaticInit187d0a3605b3f4e53a06dc41d9d006b6
         ),
         'A' => 
         array (
-            'Akimemane\\Ecf\\' => 14,
+            'App\\' => 4,
         ),
     );
 
@@ -22,7 +22,7 @@ class ComposerStaticInit187d0a3605b3f4e53a06dc41d9d006b6
         array (
             0 => __DIR__ . '/../..' . '/routes',
         ),
-        'Akimemane\\Ecf\\' => 
+        'App\\' => 
         array (
             0 => __DIR__ . '/../..' . '/src',
         ),

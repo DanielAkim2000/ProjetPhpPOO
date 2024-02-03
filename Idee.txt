@@ -1,0 +1,37 @@
+                            ---Base de données---
+
+1-Pour la base de donnée j'ai crée une  table humain qui stockera le nom et le prenom d une personne tiers;
+2-La table HumainOfkgb sera la base des données des agents clients et cibles;
+3-Pour les agents comme ils auront une ou plusieurs spécialité je vais créer une table associative qui me permettra de liste toutes le relations entres les agents et leur differents specialité;
+4-Je vais creer une table pays qui listera tout les pays et qui me permettra pour un premier cas d'etre les nationnalité des agents cliens ou cibles et deuxiement servira pour les pays des missions;
+5-Je vais creer une table statut qui listera les differents statut (Echec,encours,termine,EN preparation) qui sera en relation avec 1 a plusieurs avec ma table mission;
+6-J'ai fais une table type mission qui va lister les differents type de mission;
+7-J'ai fais 3 tables associatives pour les differents relations de la tables missions;
+
+
+                            ----Back_end----
+
+1-J'ai commencé par la commande composer init pour initialiser composer dans notre projet ce qui cree les dossier vendor composer.json et src 
+2-J'ai ajoute un dossier routes qui contiendra Router.php que je parametrais pour qu'il execute mes url avec les controlleur qui seront associés (ps: Par exemple si je dois faire un get ou un post ces methodeds je les creerai a travers mon router)
+3-Fichier .htaccess
+    RewriteEngine On :
+
+        Active le module mod_rewrite. Il doit être activé pour que les règles de réécriture fonctionnent.
+
+    RewriteCond %{REQUEST_FILENAME} !-f :
+
+        Condition : Cette ligne spécifie une condition pour la règle suivante. 
+        Elle indique que la règle de réécriture ne s'appliquera que si le fichier demandé n'existe pas (!-f signifie "n'est pas un fichier").
+
+    RewriteRule ^(.*)$ public/index.php?url=$1 [QSA,L] :
+        Règle de réécriture : Cette ligne spécifie la règle de réécriture proprement dite.
+    ^(.*)$ : Capture tout le chemin de l'URL demandée.
+    public/index.php?url=$1 : Redirige la requête vers public/index.php en passant le chemin en tant que paramètre url.
+    [QSA] : "QueryString Append" - ajoute les paramètres de requête (comme ?key=value) à la fin de l'URL redirigée.
+    [L] : "Last" - arrête le processus de réécriture une fois que cette règle est appliquée.
+
+4-Dans mon router je commence par creer un de ses attributs qui sera url il recupera grace a $_GET['url'] le parametre passé en url 
+
+Remarque : ne jamais oublier de faire un composer dump-autoload apres avoir modifier le champ "autoload" dans composer.json 
+
+5-J ai creer par la suite Route.php qui contiendra les methods matches et execute qui me permettront respectivement de verifier si les routes matches et lautre pour executer une route avec le controller et la methode demander

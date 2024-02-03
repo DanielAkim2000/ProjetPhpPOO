@@ -2,7 +2,7 @@
     "name": "akimemane/ecf",
     "autoload": {
         "psr-4": {
-            "Akimemane\\Ecf\\": "src/",
+            "App\\": "src/",
             "Router\\": "routes/"
         }
     },
