@@ -25,7 +25,7 @@ CREATE TABLE HUMAIN(
 );
 
 CREATE TABLE ADMINISTRATEURS(
-    administration_id INT NOT NULL PRIMARY KEY,
+    admin_id INT NOT NULL PRIMARY KEY,
     email VARCHAR(255) NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL,
     dateofcreation DATE NOT NULL
@@ -89,41 +89,41 @@ CREATE TABLE MISSIONS(
 
 /* Creation des tables associatives */
 CREATE TABLE SPECIALITYOFAGENTS(
+    id INT AUTO_INCREMENT PRIMARY KEY,
     agent INT NOT NULL,
     speciality INT NOT NULL,
-    PRIMARY KEY(agent,speciality),
     Foreign Key (agent) REFERENCES AGENTS(agent_id),
     Foreign Key (speciality) REFERENCES SPECIALITYS(speciality_id)
 );
 
 CREATE TABLE AGENTSOFMISSIONS(
+    id INT AUTO_INCREMENT PRIMARY KEY,
     agent INT NOT NULL,
     mission INT NOT NULL,
-    PRIMARY KEY(agent,mission),
     Foreign Key (agent) REFERENCES AGENTS(agent_id),
     Foreign Key (mission) REFERENCES MISSIONS(mission_id)
 );
 
 CREATE TABLE PLANQUEOFMISSIONS(
+    id INT AUTO_INCREMENT PRIMARY KEY,
     planque INT NOT NULL,
     mission INT NOT NULL,
-    PRIMARY KEY(planque,mission),
     Foreign Key (planque) REFERENCES PLANQUES(planque_id),
     Foreign Key (mission) REFERENCES MISSIONS(mission_id)
 );
 
 CREATE TABLE CONTACTOFMISSIONS(
+    id INT AUTO_INCREMENT PRIMARY KEY,
     contact INT NOT NULL,
     mission INT NOT NULL,
-    PRIMARY KEY(contact,mission),
     Foreign Key (contact) REFERENCES CONTACTS(contact_id),
     Foreign Key (mission) REFERENCES MISSIONS(mission_id)
 );
 
 CREATE TABLE CIBLEOFMISSIONS(
+    id INT AUTO_INCREMENT PRIMARY KEY,
     cible INT NOT NULL,
     mission INT NOT NULL,
-    PRIMARY KEY(cible,mission),
     Foreign Key (cible) REFERENCES CIBLES(cible_id),
     Foreign Key (mission) REFERENCES MISSIONS(mission_id)
 );

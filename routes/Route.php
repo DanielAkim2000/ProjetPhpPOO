@@ -1,6 +1,7 @@
 <?php
 
 namespace Router;
+use Database\DBConnection;
 
 class Route{
     
@@ -17,7 +18,7 @@ class Route{
     /* Methode pour voir si l'url matches*/
     public function matches(string $url)
     {
-        $path = preg_replace('#:([\w]+)#', '([^/])+',$this->path);
+        $path = preg_replace('#:([\w]+)#', '([^/]+)',$this->path);
         $pathToMatch= "#^$path$#";
 
         if(preg_match($pathToMatch, $url, $matches)){
@@ -34,11 +35,10 @@ class Route{
 
         $params = explode('@',$this->action);
         $objet= $params[0];
-        $controller = new $objet();
+        $controller = new $objet(new DBConnection(DB_NAME,DB_HOST,DB_USERNAME,DB_PASSWORD));
         $method = $params[1];
 
-        return isset($this->matches[1])? $controller->$method($this->matches[1]) :
-        $controller->$method();
+        return isset($this->matches[1])? $controller->$method($this->matches[1]) : $controller->$method();
 
     }
 }

@@ -10,6 +10,7 @@
 
 
                             ----Back_end----
+  **Router**
 
 1-J'ai commencé par la commande composer init pour initialiser composer dans notre projet ce qui cree les dossier vendor composer.json et src 
 2-J'ai ajoute un dossier routes qui contiendra Router.php que je parametrais pour qu'il execute mes url avec les controlleur qui seront associés (ps: Par exemple si je dois faire un get ou un post ces methodeds je les creerai a travers mon router)
@@ -35,3 +36,19 @@
 Remarque : ne jamais oublier de faire un composer dump-autoload apres avoir modifier le champ "autoload" dans composer.json 
 
 5-J ai creer par la suite Route.php qui contiendra les methods matches et execute qui me permettront respectivement de verifier si les routes matches et lautre pour executer une route avec le controller et la methode demander
+
+  **Les Vues**
+
+1-creation de la metho view dans le router pour afficher une page ex:
+public function index()
+{
+    return $this->view('Pays.index');
+}
+2-Creation du dossier view avec le fichier layout.php et le dossier Pays( c est un exemple) qui contiendra index.php et show.php la page d accueil et la page d'un pays en particulier
+3-Creation des constants avec define dans le fichier index.php dans le dossier public
+
+
+ **Database**
+
+1-Je vais commencer par creer le dossier database puis a l inerieur creer le fichier DBConnection qui me servira pour la connexion avec la database
+2-On se protege des injections sql en utilisant la methode prepare de mon statment;

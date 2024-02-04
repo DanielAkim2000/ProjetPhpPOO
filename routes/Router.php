@@ -7,7 +7,7 @@ class Router{
     public $routes;
     public function __construct($url) 
     {
-        $this->url= $url;
+        $this->url = $url;
     }
 
     public function get(string $path,string $action)

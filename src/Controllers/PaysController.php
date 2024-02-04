@@ -1,15 +1,32 @@
 <?php
 
 namespace App\Controllers;
+use App\Models\Pays;
+use Database\DBConnection;
 
+class PaysController extends Controller {
 
-class PaysController {
-
-    public function index(){
-        echo 'Page Home';
+    public function welcome()
+    {
+        return $this->view('Pays.welcome');
     }
 
-    public function show(int $id){
-        echo 'Je suis le pays';
+    public function index()
+    {
+        $pays = new Pays($this->getDB());
+        $pays = $pays->all();
+
+        return $this->view('Pays.index', compact('pays'));
+    }
+
+    public function show(int $id)
+    {
+
+        $pay = new Pays ($this->getDB());
+        $pays = $pay->findById($id);      
+        foreach ($pays as $unpays) {
+            echo $unpays->name.' ';
+        }
+        return $this->view('Pays.show' , compact('pays'));
     }
 }
