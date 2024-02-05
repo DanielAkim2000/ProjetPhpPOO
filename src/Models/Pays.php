@@ -9,7 +9,7 @@ class Pays extends Model{
     protected $table = 'pays';
     protected $idname = 'pays_id';
 
-    private $name;
+    protected $name;
 
     private $pays_id;
 

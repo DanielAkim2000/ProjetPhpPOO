@@ -21,12 +21,9 @@ class PaysController extends Controller {
 
     public function show(int $id)
     {
-
         $pay = new Pays ($this->getDB());
         $pays = $pay->findById($id);      
-        foreach ($pays as $unpays) {
-            echo $unpays->name.' ';
-        }
+        
         return $this->view('Pays.show' , compact('pays'));
     }
 }

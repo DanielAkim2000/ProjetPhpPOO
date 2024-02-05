@@ -2,11 +2,13 @@
 
 namespace App\Models;
 
+use App\Models\HumainofKgb;
+
 class Contacts extends HumainofKgb{
 
-    private int $contact_id; 
+    private $contact_id; 
 
-    private string $codename;
+    private $codename;
 
     private $idname = 'contact_id';
 

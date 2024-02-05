@@ -22,7 +22,7 @@ class Router{
                 $route->execute();
             }
         }
-
+        
         return header('HTTP/1.0 404 Not Found');
     }
 }

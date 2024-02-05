@@ -18,6 +18,11 @@ CREATE TABLE TYPEMISSION(
     description VARCHAR(255) NOT NULL UNIQUE
 );
 
+CREATE TABLE TYPEPLANQUE(
+    type_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    description VARCHAR(255) NOT NULL UNIQUE
+);
+
 CREATE TABLE HUMAIN(
     humain_id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
     lastname VARCHAR(255) NOT NULL,
@@ -28,32 +33,38 @@ CREATE TABLE ADMINISTRATEURS(
     admin_id INT NOT NULL PRIMARY KEY,
     email VARCHAR(255) NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL,
-    dateofcreation DATE NOT NULL
+    dateofcreation DATE NOT NULL,
+    humain_id INT NOT NULL UNIQUE,
+    Foreign Key (humain_id) REFERENCES HUMAIN(humain_id)
 );
 
 CREATE TABLE HUMAINOFKGB(
     humainkgb_id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
     birthday DATE NOT NULL,
     nationality_id INT NOT NULL,
+    humain_id INT NOT NULL UNIQUE,
     Foreign Key (nationality_id) REFERENCES pays(pays_id),
-    Foreign Key (humainkgb_id) REFERENCES HUMAIN(humain_id)
+    Foreign Key (humain_id) REFERENCES HUMAIN(humain_id)
 );
 
 CREATE TABLE AGENTS(
     agent_id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
     codeofidentification INT NOT NULL UNIQUE,
-    Foreign Key (agent_id) REFERENCES HUMAINOFKGB(humainkgb_id)
+    humainkgb_id INT NOT NULL UNIQUE,
+    FOREIGN KEY (humainkgb_id) REFERENCES HUMAINOFKGB(humainkgb_id)
 );
 
 CREATE TABLE CIBLES(
     cible_id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
     codename VARCHAR(255) UNIQUE,
-    Foreign Key (cible_id) REFERENCES HUMAINOFKGB(humainkgb_id)
+    humainkgb_id INT NOT NULL UNIQUE,
+    Foreign Key (humainkgb_id) REFERENCES HUMAINOFKGB(humainkgb_id)
 );
 
 CREATE TABLE CONTACTS(
     contact_id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
     codename VARCHAR(255) UNIQUE,
+    humainkgb_id INT NOT NULL UNIQUE,
     Foreign Key (contact_id) REFERENCES HUMAINOFKGB(humainkgb_id)
 );
 
@@ -65,8 +76,9 @@ CREATE TABLE SPECIALITYS(
 CREATE TABLE PLANQUES(
     planque_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     code VARCHAR(255) NOT NULL UNIQUE,
-    type VARCHAR(255) UNIQUE,
+    typeplanque_id INT NOT NULL UNIQUE,
     pays_id INT NOT NULL,
+    Foreign Key (typeplanque_id) REFERENCES TYPEPLANQUE(type_id),
     Foreign Key (pays_id) REFERENCES PAYS(pays_id)
 );
 
@@ -130,7 +142,7 @@ CREATE TABLE CIBLEOFMISSIONS(
 
 /*Insertion dans les tables de base*/
 
-INSERT INTO PAYS(name) VALUES('Afghanistan'), ('Albania'), ('Algeria'), ('Andorra'), ('Angola'),
+INSERT INTO PAYS(name) VALUES ('Afghanistan'), ('Albania'), ('Algeria'), ('Andorra'), ('Angola'),
 ('Antigua and Barbuda'), ('Argentina'), ('Armenia'), ('Australia'), ('Austria'),
 ('Azerbaijan'), ('Bahamas'), ('Bahrain'), ('Bangladesh'), ('Barbados'),
 ('Belarus'), ('Belgium'), ('Belize'), ('Benin'), ('Bhutan'),
@@ -168,3 +180,11 @@ INSERT INTO PAYS(name) VALUES('Afghanistan'), ('Albania'), ('Algeria'), ('Andorr
 ('Tuvalu'), ('Uganda'), ('Ukraine'), ('United Arab Emirates'), ('United Kingdom'),
 ('United States'), ('Uruguay'), ('Uzbekistan'), ('Vanuatu'), ('Vatican City'),
 ('Venezuela'), ('Vietnam'), ('Yemen'), ('Zambia'), ('Zimbabwe');
+
+INSERT INTO STATUS(statut) VALUES ('En préparation'), ('En cours'), ('Terminé'), ('Échec');
+
+INSERT INTO TYPEMISSION(description) VALUES ('Surveillance'), ('Assassinat'), ('Infiltration');
+
+INSERT INTO SPECIALITYS(nameofspeciality) VALUES ('Espionnage Industriel'), ('Contre-Espionnage'), ('Cryptanalyse'), ('Infiltration'), ('Désinformation'), ('Assassinat ciblé'), ('Opérations de sabotage') ,('Intelligence Électronique') ,('Sabotage informatique') ,('Guerre psychologique');
+
+INSERT INTO TYPEPLANQUE(description) VALUES ('Appartement en Ville') ,('Villa de Vacances'),('Bureau Commercial') ,('Camion de Marchandises') ,('Bunker Souterrain') ,('Maison de Quartier Résidentiel'),('Hôtel') ,('Entrepôt Commercial') ,('Véhicule Récréatif') ,('Maison de Retraite');

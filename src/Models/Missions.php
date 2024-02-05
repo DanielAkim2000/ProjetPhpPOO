@@ -10,7 +10,34 @@ class Missions extends Model{
     private string $titre;
     private string $description;
     private string $codename;
-    private int $pays_id;
-    private int $type_id;
-    private int $statut_id;
+    private Pays $pays;
+    private Type $type;
+    private Statut $statut;
+
+    public function setTitre(string $titre)
+    {
+        $this->titre = $titre;
+    }
+
+    public function setDescription(string $description)
+    {
+        $this->description = $description;
+    }
+
+    public function setPays(Pays $pays)
+    {
+        $this->pays = $pays;
+    }
+
+    public function setType(Type $type)
+    {
+        $this->type = $type;
+    }
+
+    public function setStatut(Statut $statut)
+    {
+        $this->statut = $statut;
+    }
+
+
 }

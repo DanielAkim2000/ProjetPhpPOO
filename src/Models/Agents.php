@@ -2,16 +2,39 @@
 
 namespace App\Models;
 
+use App\Models\HumainofKgb;
+use DateTime;
+
 class Agents extends HumainofKgb{
 
-    private int $agent_id; 
+    protected $table = 'agents';
+    protected $idname = 'agent_id';
+    public $agent_id;
+    public $codeofidentification;
 
-    private string $codeofidentifications;
-
-    private $idname = 'agent_id';
-
-    public function getCodeofId(): string
+    public function getSpeciality() : array
     {
-        return $this->codeofidentifications;
+        return $this->query(
+            "
+            SELECT s.nameofspeciality FROM SPECIALITYS s
+            INNER JOIN SPECIALITYOFAGENTS sp ON sp.speciality = s.speciality_id
+            INNER JOIN AGENTS a ON sp.agent = a.agent_id
+            WHERE a.agent_id = ?
+            ", 
+            $this->agent_id,null,get_class(new Specialitys($this->db))
+        );
+    }
+
+    public function getMissions() : array
+    {
+        return $this->query(
+            "
+            SELECT m.* FROM MISSIONS m
+            INNER JOIN AGENTSOFMISSIONS am ON am.mission = m.mission_id
+            INNER JOIN AGENTS a ON am.agent = a.agent_id
+            WHERE a.agent_id = ?
+            ",
+            $this->agent_id
+        );
     }
 }

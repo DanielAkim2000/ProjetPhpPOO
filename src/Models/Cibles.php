@@ -2,11 +2,13 @@
 
 namespace App\Models;
 
+use App\Models\HumainofKgb;
+
 class Cibles extends HumainofKgb{
 
-    private int $cible_id; 
+    private $cible_id; 
 
-    private string $codename;
+    private $codename;
 
     private $idname = 'cible_id';
 

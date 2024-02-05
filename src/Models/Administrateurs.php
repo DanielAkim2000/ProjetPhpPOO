@@ -2,17 +2,18 @@
 
 namespace App\Models;
 
+use App\Models\HumainofKgb;
 use DateTime;
 
 class Administrateurs extends Humain{
 
-    private int $admin_id;
+    private $admin_id;
 
     private string $email;
 
-    private string $password;
+    private $password;
 
-    private DateTime $datedecreation;
+    private $datedecreation;
 
     private $idname = 'admin_id';
 
