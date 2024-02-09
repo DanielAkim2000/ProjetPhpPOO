@@ -11,7 +11,7 @@ class Pays extends Model{
 
     protected $name;
 
-    private $pays_id;
+    public $pays_id;
 
     public function getName(): string
     {

@@ -5,7 +5,6 @@ namespace App\Controllers;
 use App\Models\Agents;
 use App\Models\HumainofKgb;
 use App\Models\Pays;
-use Exception;
 
 class AgentsController extends Controller {
 

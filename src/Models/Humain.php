@@ -12,12 +12,12 @@ class Humain extends Model{
 
     public $humain_id;
 
-    public function getFirstname()
+    public function getFirstname() : string 
     {
         return $this->firstname;
     }
 
-    public function getLastname()
+    public function getLastname() : string 
     {
         return $this->lastname;
     }

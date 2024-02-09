@@ -4,14 +4,14 @@ namespace App\Models;
 
 use App\Models\Abstract\Model;
 
-class Statut extends Model{
+class Statuts extends Model{
 
     protected $table = 'STATUTS';
     private $statut_id;
     protected $idname ='statut_id'; 
-    private string $statut;
+    private $statut;
 
-    public function getStatut()
+    public function getNameStatut() : string 
     {
         return $this->statut;
     }

@@ -1,5 +1,8 @@
 <?php
+
+use App\Exceptions\NotFoundException;
 use Router\router;
+
 require "../vendor/autoload.php";
 
 //Permet d'afficher les erreurs
@@ -18,8 +21,19 @@ $router = new Router($_GET['url']);
 $router->get('/', 'App\Controllers\PaysController@welcome');
 $router->get('/Pays', 'App\Controllers\PaysController@index');
 $router->get('/Agents', 'App\Controllers\AgentsController@index');
+$router->get('/Missions', 'App\Controllers\MissionsController@index');
+$router->get('/Planques', 'App\Controllers\PlanquesController@index');
 $router->get('/Pays/:id', 'App\Controllers\PaysController@show');
+$router->get('/Planques/Edit/:id', 'App\Controllers\PlanquesController@edit');
 
 
+$router->post('/Planques/Delete/:id', 'App\Controllers\PlanquesController@destroy');
+$router->post('/Missions/Delete/:id', 'App\Controllers\PlanquesController@destroy');
+$router->post('/Planques/Edit/:id', 'App\Controllers\PlanquesController@update');
 
-$router->run();
+try{
+    $router->run();
+}catch(NotFoundException $e){
+    return $e->error404();
+};
+

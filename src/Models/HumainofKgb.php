@@ -23,34 +23,29 @@ class HumainofKgb extends Humain{
             INNER JOIN HUMAINOFKGB hk ON hk.humain_id = h.humain_id
             WHERE hk.humainkgb_id = ?
             ",
-            $this->humainkgb_id,true,get_class(new Humain($this->db))
+            [$this->humainkgb_id],
+            true,
+            get_class(new Humain($this->db))
         );
    }
 
-    public function getNationality()
+    public function getNationality() : Pays
     {
         $result = $this->query(
             "
-            SELECT p.name FROM PAYS p
+            SELECT p.* FROM PAYS p
             INNER JOIN HUMAINOFKGB h ON h.nationality_id = p.pays_id
             WHERE h.humainkgb_id = ?
-            "
-            ,$this->humainkgb_id,true,get_class(new Pays($this->db))
-        );
-
-        return $result->getName();
-    }
-
-    public function getBirthday()
-    {
-        $result = $this->query(
-            "
-            SELECT birthday FROM HUMAINOFKGB WHERE humainkgb_id = ?
             ",
-            $this->humainkgb_id,true
+            [$this->humainkgb_id],
+            true,get_class(new Pays($this->db))
         );
-        
-        return $result->birthday;
+
+        return $result;
     }
 
+    public function getBirthday() : string 
+    {
+        return $this->birthday;
+    }
 }

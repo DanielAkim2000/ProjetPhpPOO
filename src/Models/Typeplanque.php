@@ -3,11 +3,11 @@
 namespace App\Models;
 use App\Models\Abstract\Model;
 
-class Typemission extends Model{
+class Typeplanque extends Model{
 
-    protected $table = 'TYPEMISSION';
+    protected $table = 'TYPEPLANQUE';
     protected $idname='type_id';
-    private $type_id;
+    public $type_id;
     private $description;
 
     public function getNameType() : string 

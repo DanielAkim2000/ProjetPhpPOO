@@ -16,12 +16,14 @@ class Agents extends HumainofKgb{
     {
         return $this->query(
             "
-            SELECT s.nameofspeciality FROM SPECIALITYS s
+            SELECT s.* FROM SPECIALITYS s
             INNER JOIN SPECIALITYOFAGENTS sp ON sp.speciality = s.speciality_id
             INNER JOIN AGENTS a ON sp.agent = a.agent_id
             WHERE a.agent_id = ?
             ", 
-            $this->agent_id,null,get_class(new Specialitys($this->db))
+            [$this->agent_id],
+            null,
+            get_class(new Specialitys($this->db))
         );
     }
 
@@ -34,7 +36,25 @@ class Agents extends HumainofKgb{
             INNER JOIN AGENTS a ON am.agent = a.agent_id
             WHERE a.agent_id = ?
             ",
-            $this->agent_id
+            [$this->agent_id],
+            null,
+            get_class(new Missions($this->db))
         );
+    }
+
+    public function getHumainKgbInfo() : HumainofKgb
+    {
+        $result = $this->query(
+            "
+            SELECT hk.* FROM HUMAINOFKGB hk
+            INNER JOIN AGENTS a ON a.humainkgb_id = hk.humainkgb_id
+            WHERE a.agent_id = ?
+            ",
+            [$this->agent_id],
+            true,
+            get_class(new HumainofKgb($this->db))
+        );
+
+        return $result;
     }
 }

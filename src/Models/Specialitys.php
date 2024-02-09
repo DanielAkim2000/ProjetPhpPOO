@@ -11,7 +11,7 @@ class Specialitys extends Model{
     private $speciality_id;
     private $nameofspeciality;
     
-    public function getNameOfSpeciality()
+    public function getNameOfSpeciality() : string 
     {
         return $this->nameofspeciality;
     }
