@@ -13,6 +13,11 @@ class Planques extends Model{
     public $typeplanque_id;
     private $pays_id;
 
+    public function getId() : int 
+    {
+        return $this->planque_id;
+    }
+
     public function getCode() : string 
     {
         return $this->code;
@@ -50,14 +55,14 @@ class Planques extends Model{
         return $result;
     }
 
-    public function update(int $id, array $data,?array $relations=null) : bool
-    {
-        parent::update($id,$data);
+    // public function update(int $id, array $data,?array $relations=null) : bool
+    // {
+    //     parent::update($id,$data);
 
-        $stmt = $this->db->getPDO()->prepare("UPDATE PLANQUES SET pays_id = ?, typeplanque_id = ? WHERE planque_id = ?");
-        $result = $stmt->execute([$relations['pays_id'],$relations['typeplanque_id'],$id]);
+    //     $stmt = $this->db->getPDO()->prepare("UPDATE PLANQUES SET pays_id = ?, typeplanque_id = ? WHERE planque_id = ?");
+    //     $result = $stmt->execute([$relations['pays_id'],$relations['typeplanque_id'],$id]);
 
-        return $result ;
-    }
+    //     return $result ;
+    // }
     
 }

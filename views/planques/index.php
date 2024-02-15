@@ -1,4 +1,6 @@
-<table class="table">
+<h1 class="text-center"><a href="/ECF/Planques/Create" class="btn btn-success">Créer une nouvelle planque</a> Administration des planques</h1>
+
+<table class="table w-75 m-auto text-center">
     <thead>
     <tr>
         <th scope="col">#</th>

@@ -8,10 +8,13 @@ class Pays extends Model{
     
     protected $table = 'pays';
     protected $idname = 'pays_id';
-
     protected $name;
-
     public $pays_id;
+
+    public function getId() : int
+    {
+        return $this->pays_id;
+    }
 
     public function getName(): string
     {

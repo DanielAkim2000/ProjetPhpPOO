@@ -8,8 +8,13 @@ class Specialitys extends Model{
 
     protected $table = 'specialitys';
     protected $idname = 'speciality_id';
-    private $speciality_id;
+    public $speciality_id;
     private $nameofspeciality;
+
+    public function getId() : int
+    {
+        return $this->speciality_id;
+    }
     
     public function getNameOfSpeciality() : string 
     {

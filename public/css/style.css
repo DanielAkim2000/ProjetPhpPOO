@@ -1,0 +1,13 @@
+/* Header style css */
+.header{
+    background-color: black;
+    opacity: 85%;
+}
+/* .lien{
+    color: white;
+} */
+
+/* Contenu de la page */
+.content{
+    padding-top: 70px;
+}

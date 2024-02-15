@@ -76,7 +76,7 @@ CREATE TABLE SPECIALITYS(
 CREATE TABLE PLANQUES(
     planque_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     code VARCHAR(255) NOT NULL UNIQUE,
-    typeplanque_id INT NOT NULL UNIQUE,
+    typeplanque_id INT NOT NULL,
     pays_id INT NOT NULL,
     Foreign Key (typeplanque_id) REFERENCES TYPEPLANQUE(type_id),
     Foreign Key (pays_id) REFERENCES PAYS(pays_id)

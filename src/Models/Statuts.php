@@ -11,6 +11,11 @@ class Statuts extends Model{
     protected $idname ='statut_id'; 
     private $statut;
 
+    public function getId()
+    {
+        return $this->statut_id;
+    }
+
     public function getNameStatut() : string 
     {
         return $this->statut;

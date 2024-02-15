@@ -10,14 +10,44 @@ class PlanquesController extends Controller{
 
     public function index()
     {
+        $this->isAdmin();
+
         $planques = new Planques($this->getDB());
         $planques = $planques->all();
 
         return $this->view('Planques.index', compact('planques'));
     }
 
+    public function create()
+    {
+        $this->isAdmin();
+
+        $pays = new Pays($this->getDB());
+        $pays = $pays->all();
+
+        $typeplanques = new Typeplanque($this->getDB());
+        $typeplanques = $typeplanques->all();
+
+        return $this->view('Planques.form', compact('typeplanques','pays'));
+    }
+
+    public function created()
+    {
+        $this->isAdmin();
+
+        $planque = new Planques($this->getDB());
+
+        $result = $planque->create($_POST);
+
+        if($result){
+            return header('Location: /ECF/Planques ');
+        }
+    }
+
     public function destroy(int $id)
     {
+        $this->isAdmin();
+
         $planques = new Planques($this->getDB());
         $result = $planques->destroy($id);
 
@@ -28,6 +58,8 @@ class PlanquesController extends Controller{
 
     public function edit(int $id)
     {
+        $this->isAdmin();
+
         $planques = new Planques($this->getDB());
         $planque = $planques->findById($id);
 
@@ -37,17 +69,16 @@ class PlanquesController extends Controller{
         $typeplanques = new Typeplanque($this->getDB());
         $typeplanques = $typeplanques->all();
 
-        return $this->view('Planques.edit', compact('planque','pays','typeplanques'));
+        return $this->view('Planques.form', compact('planque','pays','typeplanques'));
     }
 
     public function update(int $id)
     {
+        $this->isAdmin();
+
         $planques = new Planques($this->getDB());
 
-        $relations['pays_id'] = array_pop($_POST);
-        $relations['typeplanque_id'] = array_pop($_POST);
-
-        $result = $planques->update($id, $_POST, $relations);
+        $result = $planques->update($id, $_POST);
 
         if($result){
             return header('Location: /ECF/Planques');

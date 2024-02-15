@@ -10,6 +10,11 @@ class Typeplanque extends Model{
     public $type_id;
     private $description;
 
+    public function getId() : int
+    {
+        return $this->type_id;
+    }
+
     public function getNameType() : string 
     {
         return $this->description;

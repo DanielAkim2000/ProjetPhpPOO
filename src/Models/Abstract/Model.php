@@ -23,9 +23,25 @@ abstract class Model{
         
     }
 
-    public function findById($id): Model
+    public function findById($id)
     {
         return $this->query("SELECT * FROM {$this->table} WHERE {$this->idname} = ?", [$id], true);
+    }
+
+    public function create(array $data, ?array $relations = null) : bool
+    {
+        $firstParenthesis = "";
+        $secondParenthesis = "";
+        $i = 1;
+
+        foreach ($data as $key => $value) {
+            $comma = ($i === count($data))? " ": ", ";
+            $firstParenthesis .= "{$key}{$comma}";
+            $secondParenthesis .= ":{$key}{$comma}";
+            $i++;
+        }
+
+        return $this->query("INSERT INTO {$this->table} ($firstParenthesis) VALUES ($secondParenthesis)",$data);
     }
 
     public function update(int $id,array $data) : bool
@@ -34,8 +50,9 @@ abstract class Model{
         $i = 1;
 
         foreach ($data as $key => $value) {
-            $comma = $i === count($data)? " ": ", ";
+            $comma = ($i === count($data))? " ": ", ";
             $sqlRequestPart .= "{$key} = :{$key}{$comma}";
+            $i++;
         }
 
         $data['id'] = $id;
@@ -55,7 +72,7 @@ abstract class Model{
         if(
             strpos($sql, 'DELETE') === 0 
             || strpos($sql, 'UPDATE') === 0 
-            || strpos($sql, 'CREATE') === 0){
+            || strpos($sql, 'INSERT') === 0){
 
             $stmt = $this->db->getPDO()->$method($sql);
             $stmt->setFetchMode(PDO::FETCH_CLASS,$classes? $classes : get_class($this),[$this->db]);
