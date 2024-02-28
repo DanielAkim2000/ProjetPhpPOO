@@ -1,6 +1,8 @@
-<h1 class="text-center"><a class="btn btn-success" href="Missions/Create">Créer une nouvelle mission</a> Administration des missions</h1>
+<h1 class="text-center mb-4">Administration des missions</h1>
 
-<table class="table w-75 m-auto text-center">
+<?php include(VIEWS.'filtre.php'); ?>
+
+<table id="table" class="table table-responsive w-75 m-auto mb-4 text-center table-hover shadow-lg table-bordered rounded-table table-rounded">
     <thead>
         <tr>
             <th scope="col">#</th>
@@ -22,21 +24,21 @@
     <tbody>
     <?php foreach($params['missions'] as $mission): ?>
         <tr>
-            <td><?= $mission->mission_id ?></td>
-            <td><?= $mission->getTitre() ?></td>
-            <td><?= $mission->getDescription() ?></td>
-            <td><?= $mission->getCodeName() ?></td>
-            <td><?= $mission->getPays()->getName() ?></td>
-            <td><?= $mission->getType()->getNameType() ?></td>
-            <td><?= $mission->getStatut()->getNameStatut() ?></td>
-            <td><?= $mission->getSpeciality()->getNameOfSpeciality() ?></td>
-            <td><?= $mission->getStartdate() ?></td>
-            <td><?= $mission->getEnddate() ?></td>
+            <th scope="row"><?= htmlspecialchars($mission->getId()) ?></th>
+            <td><?= htmlspecialchars($mission->getTitre()) ?></td>
+            <td class="truncate-text"><?= htmlspecialchars($mission->getDescription()) ?></td>
+            <td><?= htmlspecialchars($mission->getCodeName()) ?></td>
+            <td><?= htmlspecialchars($mission->getPays()->getName()) ?></td>
+            <td><?= htmlspecialchars($mission->getType()->getNameType()) ?></td>
+            <td><?= htmlspecialchars($mission->getStatut()->getNameStatut()) ?></td>
+            <td><?= htmlspecialchars($mission->getSpeciality()->getNameOfSpeciality()) ?></td>
+            <td><?= htmlspecialchars($mission->getStartdate()) ?></td>
+            <td><?= htmlspecialchars($mission->getEnddate()) ?></td>
             <td>
                 <?php 
                     $agents = array_map(
                         function($agent) {
-                            return $agent->getHumainKgbInfo()->getHumain()->getFirstname();
+                            return htmlspecialchars($agent->getHumainKgbInfo()->getHumain()->getFirstname());
                         },
                         $mission->getAgents()
                     );
@@ -48,7 +50,7 @@
                     $contacts = array_map(
                         function($contact) 
                         {
-                            return $contact->getHumainKgbInfo()->getHumain()->getFirstname();
+                            return htmlspecialchars($contact->getHumainKgbInfo()->getHumain()->getFirstname());
                         },
                         $mission->getContacts()
                     );
@@ -60,7 +62,7 @@
                     $cibles =  array_map(
                         function($cible)
                         {
-                            return $cible->getHumainKgbInfo()->getHumain()->getFirstname();
+                            return htmlspecialchars($cible->getHumainKgbInfo()->getHumain()->getFirstname());
                         },
                         $mission->getCibles()
                     );
@@ -68,12 +70,14 @@
                 ?>
             </td>
             <td>
-                <a href="Missions/Edit/<?= $mission->mission_id ?>" class="btn btn-warning w-100">Modifier</a>
-                <form action="Missions/Delete/<?= $mission->mission_id ?>" class="d-inline" method="POST">
-                    <button type="submit" class="btn btn-danger mt-2 w-100">Supprimer</button>
+                <a href="/ECF/Missions/Edit/<?= $mission->getId() ?>" class="btn btn-warning w-100">Modifier</a>
+                <form class="supp" action="/ECF/Missions/Delete/<?= $mission->getId() ?>/<?= $_SESSION['token'] ?>" class="d-inline" method="POST">
+                    <button type="submit" class="btn btn-danger mt-1 w-100">Supprimer</button>
                 </form>
             </td>
         </tr>
     <?php endforeach ?>
     </tbody>
 </table>
+<a class="btn btn-success d-block w-25 m-auto mt-4" href="/ECF/Missions/Create">Créer une nouvelle mission</a>
+<?php include(VIEWS. 'pagination.php') ?>

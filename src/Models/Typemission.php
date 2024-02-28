@@ -19,4 +19,9 @@ class Typemission extends Model{
     {
         return $this->description;
     }
+
+    public function getNameForFiltre()
+    {
+        return $this->description;
+    }
 }

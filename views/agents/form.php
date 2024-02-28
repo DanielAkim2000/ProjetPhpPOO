@@ -1,6 +1,6 @@
-<h1 class="text-center"><?php echo isset($params['agent'])?'Modifications des données de l\'agent numéro '.$params['agent']->getId() : 'Créer un nouvel agent'; ?></h1>
+<h1 class="text-center mb-4"><?php echo isset($params['agent'])?'Modifications des données de l\'agent numéro '.$params['agent']->getId() : 'Créer un nouvel agent'; ?></h1>
 
-<form action="<?= isset($params['agent'])? "/ECF/Agents/Edit/{$params['agent']->getId()}" : "/ECF/Agents/Create" ?>" class="w-50 m-auto" method="POST">
+<form id="formulaire" action="<?= isset($params['agent'])? "/ECF/Agents/Edit/{$params['agent']->getId()}/{$_SESSION['token']}" : "/ECF/Agents/Create/{$_SESSION['token']}" ?>" class="w-25 m-auto" method="POST">
     <div class="form-group mb-2">
         <label class="form-label" for="codeofidentification">Code:</label>
         <input name="codeofidentification" type="text" class="form-control" value=<?= isset($params['agent'])? $params['agent']->getCode(): '' ?>>
@@ -8,10 +8,28 @@
     <div class="form-group mb-2">
         <label class="form-label"  for="firstname">Prénom:</label>
         <input name="firstname" type="text" class="form-control" value="<?= isset($params['agent'])? $params['agent']->getHumain()->getFirstname(): '' ?>">
+        <?php if(isset($_SESSION['errors'])): ?>
+            <?php if(isset($_SESSION['errors']['firstname'])) : ?>
+                <?php foreach($_SESSION['errors']['firstname'] as $errors) : ?>
+                <div class="text-danger">
+                    .<?= $errors ?>
+                </div>
+                <?php endforeach ?>
+            <?php endif ?>
+        <?php endif ?>
     </div>
     <div class="form-group mb-2">
         <label class="form-label"  for="lastname">Nom:</label>
         <input name="lastname" type="text" class="form-control" value="<?= isset($params['agent'])? $params['agent']->getHumain()->getLastname(): ''?>">
+        <?php if(isset($_SESSION['errors'])): ?>
+            <?php if(isset($_SESSION['errors']['lastname'])) : ?>
+                <?php foreach($_SESSION['errors']['lastname'] as $errors) : ?>
+                <div class="text-danger">
+                    .<?= $errors ?>
+                </div>
+                <?php endforeach ?>
+            <?php endif ?>
+        <?php endif ?>
     </div>
     <div class="form-group mb-2">
         <label class="form-label"  for="nationality_id">Nationnalité:</label>
@@ -24,10 +42,28 @@
                     ><?= $pays->getName() ?></option>
                 <?php endforeach ?>
         </select>
+        <?php if(isset($_SESSION['errors'])): ?>
+            <?php if(isset($_SESSION['errors']['nationality_id'])) : ?>
+                <?php foreach($_SESSION['errors']['nationality_id'] as $errors) : ?>
+                <div class="text-danger">
+                    .<?= $errors ?>
+                </div>
+                <?php endforeach ?>
+            <?php endif ?>
+        <?php endif ?>
     </div>
     <div class="form-group mb-2">
         <label class="form-label"  for="birthday">Date de naissance:</label>
         <input name="birthday" type="date" class="form-control" value=<?= isset($params['agent'])? $params['agent']->getHumainKgbInfo()->getBirthday() : ''?>>
+        <?php if(isset($_SESSION['errors'])): ?>
+            <?php if(isset($_SESSION['errors']['birthday'])) : ?>
+                <?php foreach($_SESSION['errors']['birthday'] as $errors) : ?>
+                <div class="text-danger">
+                    .<?= $errors ?>
+                </div>
+                <?php endforeach ?>
+            <?php endif ?>
+        <?php endif ?>
     </div>
     <div class="form-group mb-2">
         <label class="form-label"  for="speciality_id">Spécialités:</label>
@@ -45,6 +81,15 @@
                 <?= $specialities->getNameOfSpeciality() ?></option>
             <?php endforeach ?>
         </select>
+        <?php if(isset($_SESSION['errors'])): ?>
+            <?php if(isset($_SESSION['errors']['speciality_id[]'])) : ?>
+                <?php foreach($_SESSION['errors']['speciality_id[]'] as $errors) : ?>
+                <div class="text-danger">
+                    .<?= $errors ?>
+                </div>
+                <?php endforeach ?>
+            <?php endif ?>
+        <?php endif ?>
     </div>
     <div class="form-group mb-2">
         <label class="form-label"  for="mission_id">Missions:</label>
@@ -62,6 +107,15 @@
                 <?= $mission->getTitre() ?></option>
                 <?php endforeach ?>
         </select>
+        <?php if(isset($_SESSION['errors'])): ?>
+            <?php if(isset($_SESSION['errors']['mission_id[]'])) : ?>
+                <?php foreach($_SESSION['errors']['mission_id[]'] as $errors) : ?>
+                <div class="text-danger">
+                    .<?= $errors ?>
+                </div>
+                <?php endforeach ?>
+            <?php endif ?>
+        <?php endif ?>
     </div>
     <button type="submit" class="btn btn-primary mt-2">Enregistrer</button>
 </form>

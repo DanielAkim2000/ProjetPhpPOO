@@ -1,6 +1,8 @@
-<h1 class="text-center"><a href="Contacts/Create" class="btn btn-success">Créer un nouveau contact</a> Administration des contacts</h1>
+<h1 class="text-center mb-4">Administration des contacts</h1>
 
-<table class="table w-75 m-auto text-center">
+<?php include(VIEWS.'filtre.php') ?>
+
+<table id="table" class="table table-responsive w-75 m-auto mb-4 text-center table-hover shadow-lg table-bordered rounded-table table-rounded">
     <thead>
         <tr>
             <th scope="col">#</th>
@@ -15,21 +17,21 @@
     <tbody>
     <?php foreach($params['contacts'] as $contact): ?>
         <tr>
-            <td><?= $contact->getId() ?></td>
-            <td><?= $contact->getHumainKgbInfo()->getHumain()->getFirstname() ?></td>
-            <td><?= $contact->getHumainKgbInfo()->getHumain()->getLastname() ?></td>
-            <td><?= $contact->getHumainKgbInfo()->getBirthday() ?></td>
-            <td><?= $contact->getHumainKgbInfo()->getNationality()->getName() ?></td>
-            <td><?= $contact->getCodeName() ?></td>
-            <td>
-                <a href="/ECF/Contacts/Edit/<?= $contact->getId() ?>" class="btn btn-warning w-75">Modifier</a>
-                <form action="/ECF/Contacts/Delete/<?= $contact->getId() ?>" method="POST">
-                    <button type="submit" class="btn btn-danger w-75 mt-2" >Supprimer</button>
+            <th scope="row"><?= htmlspecialchars($contact->getId()) ?></th>
+            <td><?= htmlspecialchars($contact->getHumainKgbInfo()->getHumain()->getFirstname()) ?></td>
+            <td><?= htmlspecialchars($contact->getHumainKgbInfo()->getHumain()->getLastname()) ?></td>
+            <td><?= htmlspecialchars($contact->getHumainKgbInfo()->getBirthday()) ?></td>
+            <td><?= htmlspecialchars($contact->getHumainKgbInfo()->getNationality()->getName()) ?></td>
+            <td><?= htmlspecialchars($contact->getCodeName()) ?></td>
+            <td class="w-10">
+                <a href="/ECF/Contacts/Edit/<?= $contact->getId() ?>" class="btn btn-warning w-100">Modifier</a>
+                <form class="supp" action="/ECF/Contacts/Delete/<?= $contact->getId() ?>/<?= $_SESSION['token'] ?>" method="POST">
+                    <button type="submit" class="btn btn-danger w-100 mt-1" >Supprimer</button>
                 </form>
             </td>
         </tr>
     <?php endforeach ?>
     </tbody>
 </table>
-
-</table>
+<a href="/ECF/Contacts/Create" class="btn btn-success d-block w-25 m-auto mt-4">Créer un nouveau contact</a> 
+<?php include(VIEWS. 'pagination.php') ?>

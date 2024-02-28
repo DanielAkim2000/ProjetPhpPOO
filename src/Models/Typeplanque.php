@@ -19,4 +19,9 @@ class Typeplanque extends Model{
     {
         return $this->description;
     }
+
+    public function getNameForFiltre()
+    {
+        return $this->description;
+    }
 }

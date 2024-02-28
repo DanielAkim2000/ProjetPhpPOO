@@ -1,6 +1,6 @@
-<h1 class="text-center"><?php echo isset($params['planque'])?'Modifications des données de la planque numéro '.$params['planque']->getId() : 'Créer une nouvel planque'; ?></h1>
+<h1 class="text-center mb-4"><?php echo isset($params['planque'])?'Modifications des données de la planque numéro '.$params['planque']->getId() : 'Créer une nouvel planque'; ?></h1>
 
-<form action="<?= isset($params['planque'])? "/ECF/Planques/Edit/{$params['planque']->getId()}" : "/ECF/Planques/Create" ?>" class="w-50 m-auto" method="POST">
+<form id="formulaire" action="<?= isset($params['planque'])? "/ECF/Planques/Edit/{$params['planque']->getId()}/{$_SESSION['token']}" : "/ECF/Planques/Create/{$_SESSION['token']}" ?>" class="w-25 m-auto" method="POST">
     <div class="form-group mb-2">
         <label class="form-label" for="code">Code de la planque:</label>
         <input type="text" class="form-control" name="code" value=<?= isset($params['planque'])? $params['planque']->getCode() : '' ?>>
@@ -16,6 +16,15 @@
                 ><?= $type->getNameType() ?></option>
             <?php endforeach ?>
         </select>
+        <?php if(isset($_SESSION['errors'])): ?>
+            <?php if(isset($_SESSION['errors']['typeplanque_id'])) : ?>
+                <?php foreach($_SESSION['errors']['typeplanque_id'] as $errors) : ?>
+                <div class="text-danger">
+                    .<?= $errors ?>
+                </div>
+                <?php endforeach ?>
+            <?php endif ?>
+        <?php endif ?>
     </div>
     <div class="form-group mb-2">
         <label class="form-label" for="pays_id">Pays:</label>
@@ -28,6 +37,15 @@
                 ><?= $pays->getName() ?></option>
             <?php endforeach ?>
         </select>
+        <?php if(isset($_SESSION['errors'])): ?>
+            <?php if(isset($_SESSION['errors']['pays_id'])) : ?>
+                <?php foreach($_SESSION['errors']['pays_id'] as $errors) : ?>
+                <div class="text-danger">
+                    .<?= $errors ?>
+                </div>
+                <?php endforeach ?>
+            <?php endif ?>
+        <?php endif ?>
     </div>
     <button type="submit" class="btn btn-primary mt-2">Enregistrer</button>
 </form>

@@ -84,4 +84,30 @@ class Contacts extends HumainofKgb{
         return $result;
     }
 
+    public function findByNationality(int $idPays)
+    {
+        return $this->query(
+            "
+            SELECT c.* FROM CONTACTS c
+            INNER JOIN HUMAINOFKGB hk ON hk.humainkgb_id = c.humainkgb_id
+            WHERE hk.nationality_id = ?
+            ",
+            [$idPays]
+        );
+    }
+
+    public function findByName(string $name)
+    {
+        return $this->query(
+            "
+            SELECT c.* FROM CONTACTS c
+            INNER JOIN HUMAINOFKGB hk ON c.humainkgb_id = hk.humainkgb_id
+            INNER JOIN HUMAIN h ON h.humain_id = hk.humain_id
+            WHERE h.lastname LIKE ?
+            OR h.firstname LIKE ?
+            ",
+            [$name.'%',$name.'%']
+        );
+    }
+
 }

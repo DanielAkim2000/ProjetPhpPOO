@@ -1,6 +1,6 @@
-<h1 class="text-center"><a href="Typemissions/Create" class="btn btn-success">Créer un type de mission</a> Adminisatration des types de missions</h1>
+<h1 class="text-center mb-4">Administration des types de missions</h1>
 
-<table class="table w-75 text-center m-auto">
+<table class="table w-75 mb-4 text-center m-auto table-hover shadow-lg table-bordered rounded-table table-rounded">
     <thead>
         <tr>
             <th scope="col">#</th scope="col">
@@ -11,15 +11,17 @@
     <tbody>
         <?php foreach($params['typemissions'] as $type) : ?>
         <tr>
-            <td><?= $type->getId() ?></td>
-            <td><?= $type->getNameType() ?></td>
-            <td>
-                <a href="/ECF/Typemissions/Edit/<?= $type->getId() ?>" class="btn btn-warning">Modifier</a>
-                <form action="/ECF/Typemissions/Delete/<?= $type->getId() ?>" class="d-inline" method="POST">
-                    <button type="submit" class="btn btn-danger">Supprimer</button>
+            <th scope="row"><?= htmlspecialchars($type->getId()) ?></th>
+            <td><?= htmlspecialchars($type->getNameType()) ?></td>
+            <td class="w-10">
+                <a href="/ECF/Typemissions/Edit/<?= $type->getId() ?>" class="btn btn-warning w-100">Modifier</a>
+                <form class="supp" action="/ECF/Typemissions/Delete/<?= $type->getId() ?>/<?= $_SESSION['token'] ?>" method="POST">
+                    <button type="submit" class="btn btn-danger w-100 mt-1">Supprimer</button>
                 </form>
             </td>
         </tr>
         <?php endforeach ?>
     </tbody>
 </table>
+<a href="/ECF/Typemissions/Create" class="btn btn-success d-block w-25 m-auto">Créer un type de mission</a> 
+<?php include(VIEWS. 'pagination.php') ?>

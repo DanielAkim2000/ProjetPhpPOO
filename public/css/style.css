@@ -1,13 +1,140 @@
 /* Header style css */
 .header{
+    border-bottom: 1px;
     background-color: black;
     opacity: 85%;
 }
 /* .lien{
     color: white;
 } */
+/* Me permet de centrer les elemtents dans mon tableau */
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+td {
+    text-align: center;
+    vertical-align: middle;
+    padding: 8px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+th{
+    text-align: center;
+    vertical-align: middle;
+    padding: 8px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* police de la page */
+/* html{
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+} */
 
 /* Contenu de la page */
 .content{
     padding-top: 70px;
+    background-color: white;
+    padding-bottom: 70px;
+    min-height: 77vh;
+}
+/* * {
+    box-sizing: border-box;
+} */
+/* Footer style css */
+/* .divfooter{
+
+} */
+.footer{
+    background-color: black;
+    opacity: 85%;
+    width: 100%;
+    border-bottom: none;
+    overflow-x: auto;
+}
+
+/* Class utile pour toute les pages  */
+.truncate-text {
+    max-width: 150px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.rounded-table { 
+    background: white;
+}
+
+.dropdown-menu{
+    background-color: black;
+    text-decoration-color: white;
+}
+
+.w-10{
+    width: 10%; 
+}
+
+.w-20{
+    width: 20%;
+}
+
+.w-style{
+    width: 25%;
+}
+
+@media screen and (max-width: 1000px) {
+    .w-20 {
+       width: 40%;
+    }
+    .w-style{
+        width: 75%;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .w-20 {
+       width: 100%;
+    }
+    .w-style{
+        width: 75%;
+    }
+}
+
+.w-21{
+    width: 27%;
+}
+
+@media screen and (max-width: 1000px) {
+    .w-21 {
+       width: 40%;
+    }
+    .table-responsive {
+        display: block;
+        max-width: 100%;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        -ms-overflow-style: -ms-autohiding-scrollbar;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .w-21 {
+       width: 100%;
+    }
+    .table-responsive {
+        display: block;
+        max-width: 100%;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        -ms-overflow-style: -ms-autohiding-scrollbar;
+    }
+}
+
+body, html {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    font-family:'Times New Roman', Times, serif;
 }

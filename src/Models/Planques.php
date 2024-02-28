@@ -55,6 +55,26 @@ class Planques extends Model{
         return $result;
     }
 
+    public function findByTypePlanque(int $id)
+    {
+        return $this->query(
+            "
+            SELECT * FROM PLANQUES WHERE typeplanque_id = ?
+            ",
+            [$id]
+        );
+    }
+
+    public function findByName(string $name)
+    {
+        return $this->query(
+            "
+            SELECT * FROM PLANQUES WHERE code LIKE ?
+            ",
+            [$name.'%']
+        );
+    }
+
     // public function update(int $id, array $data,?array $relations=null) : bool
     // {
     //     parent::update($id,$data);

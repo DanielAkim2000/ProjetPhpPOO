@@ -32,6 +32,9 @@ class Validator{
                             break;
                         case substr($rule, 0, 3) === 'max' :
                             $this->max($name ,$this->data[$name], $rule);
+                        case 'notinjection':
+                            $this->isNotInjection($name, $this->data[$name]);
+                            break;
                         default:
                             break;
                     }
@@ -46,7 +49,7 @@ class Validator{
         $value = trim($value);
 
         if(!isset($value) || is_null($value) || empty($value)) {
-            $this->errors[$name][] = "{$name} est requis.";
+            $this->errors[$name][] = "Ce champ est requis.";
         }
     }
 
@@ -57,7 +60,7 @@ class Validator{
         $limit = (int) $matches[0][0];
 
         if(strlen($value) < $limit) {
-            $this->errors[$name][] = "{$name} est doit comprendre un minimum de {$limit} caractères .";
+            $this->errors[$name][] = "Ce champ est doit comprendre un minimum de {$limit} caractères .";
         }
 
     }
@@ -68,8 +71,17 @@ class Validator{
         $limit = (int) $matches[0][0];
 
         if(strlen($value) > $limit) {
-            $this->errors[$name][] = "{$name} est doit comprendre un maximum de {$limit} caractères .";
+            $this->errors[$name][] = "Ce champ est doit comprendre un maximum de {$limit} caractères .";
         }
 
+    }
+
+    public function isNotInjection(string $name, string $value)
+    {
+        $escapedValue = htmlspecialchars($value, ENT_QUOTES, 'UTF-8');
+
+        if ($escapedValue !== $value) {
+            $this->errors[$name][] = "Veuillez entrez une valeur valide";
+        }
     }
 }

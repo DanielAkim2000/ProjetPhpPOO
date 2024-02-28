@@ -12,7 +12,10 @@ CREATE TABLE STATUTS(
     statut_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     statut VARCHAR(255) NOT NULL UNIQUE
 );
-
+CREATE TABLE ROLES(
+    roles_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(11) NOT NULL UNIQUE
+);
 CREATE TABLE TYPEMISSION(
     type_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     description VARCHAR(255) NOT NULL UNIQUE
@@ -30,7 +33,7 @@ CREATE TABLE HUMAIN(
 );
 
 CREATE TABLE ADMINISTRATEURS(
-    admin_id INT NOT NULL PRIMARY KEY,
+    admin_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     email VARCHAR(255) NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL,
     dateofcreation DATE NOT NULL,
@@ -140,6 +143,14 @@ CREATE TABLE CIBLEOFMISSIONS(
     Foreign Key (mission) REFERENCES MISSIONS(mission_id)
 );
 
+CREATE TABLE ADMINROLES(
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    role INT NOT NULL,
+    admin INT NOT NULL,
+    Foreign Key (role) REFERENCES ROLES(roles_id),
+    Foreign Key (admin) REFERENCES ADMINISTRATEURS(admin_id)
+);
+
 /*Insertion dans les tables de base*/
 
 INSERT INTO PAYS(name) VALUES ('Afghanistan'), ('Albania'), ('Algeria'), ('Andorra'), ('Angola'),
@@ -188,3 +199,5 @@ INSERT INTO TYPEMISSION(description) VALUES ('Surveillance'), ('Assassinat'), ('
 INSERT INTO SPECIALITYS(nameofspeciality) VALUES ('Espionnage Industriel'), ('Contre-Espionnage'), ('Cryptanalyse'), ('Infiltration'), ('Désinformation'), ('Assassinat ciblé'), ('Opérations de sabotage') ,('Intelligence Électronique') ,('Sabotage informatique') ,('Guerre psychologique');
 
 INSERT INTO TYPEPLANQUE(description) VALUES ('Appartement en Ville') ,('Villa de Vacances'),('Bureau Commercial') ,('Camion de Marchandises') ,('Bunker Souterrain') ,('Maison de Quartier Résidentiel'),('Hôtel') ,('Entrepôt Commercial') ,('Véhicule Récréatif') ,('Maison de Retraite');
+
+INSERT INTO ROLES(name) VALUES('ADMIN','SUPERADMIN');

@@ -32,10 +32,53 @@ abstract class Controller{
 
     protected function isAdmin()
     {
-        if($_SESSION['auth']){
-            return true;
-        } else {
+        if(isset($_SESSION['roles'])){
+            if(in_array("ADMIN", $_SESSION['roles']) || in_array("SUPERADMIN", $_SESSION['roles'])){
+                return true;
+            } 
+        }
+        else {
             return header('Location: /ECF/Login');
         }
+    }
+
+    protected function isSuperAdmin()
+    {
+        if(isset($_SESSION['roles'])){
+            if(in_array("SUPERADMIN",$_SESSION['roles'])){
+                return true;
+            } else {
+                return header('Location: /ECF');
+            }
+        } else {
+            return header('Location: /ECF');
+        }
+    }
+
+    protected function haveToken()
+    {
+        if(isset($_SESSION['token'])){
+            if($_SESSION['token'] === $_GET['token']){
+                return true;
+            } else {
+                return header('Location: /ECF');
+            }
+        }
+        else{
+            return header('Location: /ECF');
+        }
+    }
+
+    public function nbPage(int $cpt)
+    {
+        $nbElementsParPage = 5;
+        $nbpage = ceil($cpt/$nbElementsParPage);
+        return $nbpage;
+    }
+
+    public function viewRender(string $path, array $params = null)
+    {
+        $path = str_replace('.',DIRECTORY_SEPARATOR, $path);
+        require VIEWS. $path. '.php';
     }
 }

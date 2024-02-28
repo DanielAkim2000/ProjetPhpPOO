@@ -254,4 +254,24 @@ class Missions extends Model{
         //Ensuite je retourne result qui devrait etre a true si tout c est bien passê
         return $result;
     }
+
+    public function findByType(int $typeId)
+    {
+        return $this->query(
+            "
+            SELECT * FROM MISSIONS WHERE type_id = ?
+            ",
+            [$typeId]
+        );
+    }
+
+    public function findByName(string $name)
+    {
+        return $this->query(
+            "
+            SELECT * FROM MISSIONS WHERE titre LIKE ? OR description LIKE ?
+            ",
+            [$name.'%',$name.'%']
+        );
+    }
 }

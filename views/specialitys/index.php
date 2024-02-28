@@ -1,6 +1,6 @@
-<h1 class="text-center" ><a href="Specialitys/Create" class="btn btn-success">Créer une nouvelle spécialité</a> Administration des spécialités</h1>
+<h1 class="text-center mb-4" >Administration des spécialités</h1>
 
-<table class="table w-75 m-auto text-center">
+<table class="table w-75 m-auto mb-4 text-center table-hover shadow-lg table-bordered rounded-table table-rounded">
     <thead>
         <tr>
             <th scope="col">#</th scope="col">
@@ -11,15 +11,17 @@
     <tbody>
         <?php foreach($params['specialitys'] as $speciality) : ?>
         <tr>
-            <td><?= $speciality->getId() ?></td>
-            <td><?= $speciality->getNameOfSpeciality() ?></td>
-            <td>
-                <a href="Specialitys/Edit/<?= $speciality->getId() ?>" class="btn btn-warning">Modifier</a>
-                <form action="Specialitys/Delete/<?= $speciality->getId() ?>" class="d-inline" method="POST">
-                    <button type="submit" class="btn btn-danger">Supprimer</button>
+            <th scope="row"><?= htmlspecialchars($speciality->getId()) ?></th>
+            <td><?= htmlspecialchars($speciality->getNameOfSpeciality()) ?></td>
+            <td class="w-10 m-auto">
+                <a href="/ECF/Specialitys/Edit/<?= $speciality->getId() ?>" class="btn btn-warning w-100">Modifier</a>
+                <form class="supp" action="/ECF/Specialitys/Delete/<?= $speciality->getId() ?>/<?= $_SESSION['token'] ?>" class="d-inline" method="POST">
+                    <button type="submit" class="btn btn-danger w-100 mt-1">Supprimer</button>
                 </form>
             </td>
         </tr>
         <?php endforeach ?>
     </tbody>
 </table>
+<a href="/ECF/Specialitys/Create" class="btn btn-success w-25 m-auto d-block">Créer une nouvelle spécialité</a> 
+<?php include(VIEWS. 'pagination.php') ?>

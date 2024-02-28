@@ -1,6 +1,8 @@
-<h1 class="text-center"><a href="/ECF/Planques/Create" class="btn btn-success">Créer une nouvelle planque</a> Administration des planques</h1>
+<h1 class="text-center mb-4">Administration des planques</h1>
 
-<table class="table w-75 m-auto text-center">
+<?php include(VIEWS.'filtre.php') ?>
+
+<table id="table" class="table table-responsive w-75 m-auto text-center table-hover mb-4 shadow-lg table-bordered rounded-table table-rounded">
     <thead>
     <tr>
         <th scope="col">#</th>
@@ -14,17 +16,19 @@
     <tbody>
     <?php foreach($params['planques'] as $planque): ?>
         <tr>
-            <td><?= $planque->planque_id ?></td>
-            <td><?= $planque->getCode() ?></td>
-            <td><?= $planque->getType()->getNameType() ?></td>
-            <td><?= $planque->getPays()->getName() ?></td>
-            <td>
-                <a href="Planques/Edit/<?= $planque->planque_id ?>" class="btn btn-warning">Modifier</a>
-                <form action="Planques/Delete/<?= $planque->planque_id ?>" class="d-inline" method="POST">
-                    <button type="submit" class="btn btn-danger" >Supprimer</button>
+            <th scope="row"><?= htmlspecialchars($planque->getId()) ?></th>
+            <td><?= htmlspecialchars($planque->getCode()) ?></td>
+            <td><?= htmlspecialchars($planque->getType()->getNameType()) ?></td>
+            <td><?= htmlspecialchars($planque->getPays()->getName()) ?></td>
+            <td class="w-10">
+                <a href="/ECF/Planques/Edit/<?= $planque->getId() ?>" class="btn btn-warning w-100">Modifier</a>
+                <form class="supp" action="/ECF/Planques/Delete/<?= $planque->getId() ?>/<?= $_SESSION['token'] ?>" method="POST">
+                    <button type="submit" class="btn btn-danger w-100 mt-1" >Supprimer</button>
                 </form>
             </td>
         </tr>
     <?php endforeach ?>
     </tbody>
 </table>
+<a href="/ECF/Planques/Create" class="btn btn-success d-block w-25 m-auto">Créer une nouvelle planque</a> 
+<?php include(VIEWS. 'pagination.php') ?>

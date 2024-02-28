@@ -2,8 +2,10 @@
 
 namespace App\Models\Abstract;
 
+use ArrayObject;
 use Database\DBConnection;
 use PDO;
+use PhpToken;
 
 //Model generique pour les model que je créerai
 abstract class Model{
@@ -26,6 +28,39 @@ abstract class Model{
     public function findById($id)
     {
         return $this->query("SELECT * FROM {$this->table} WHERE {$this->idname} = ?", [$id], true);
+    }
+
+    public function nbEnregistrement()
+    {
+        //PREPARATION DE LA REQUETE
+        $stmt =  $this->db->getPDO()->prepare("SELECT COUNT({$this->idname}) as cpt FROM {$this->table}");
+        //DESIGNATION DU MODE DE RECUPERATION DES DONNEES
+        $stmt->setFetchMode(PDO::FETCH_COLUMN, 0);
+        $stmt->execute();
+        $count = $stmt->fetch();
+
+        return $count;
+    }
+
+    public function getElementsForPage(int $page)
+    {
+        if(empty($page)){
+            $page = 1;
+        }
+        $cpt =(int) $this->nbEnregistrement();
+        $nbElementsParPage = 8;
+        $nbPage = ceil($cpt/$nbElementsParPage);
+        $debut = ($page-1)*$nbElementsParPage;
+
+        $stmt = $this->db->getPDO()->prepare("SELECT * FROM {$this->table} LIMIT ?,?");
+        $stmt->bindParam(1,$debut, PDO::PARAM_INT);
+        $stmt->bindParam(2,$nbElementsParPage, PDO::PARAM_INT);
+        $stmt->setFetchMode(PDO::FETCH_CLASS,get_class($this),[$this->db]);
+        $stmt->execute();
+
+        $data = $stmt->fetchAll();
+
+        return [$nbPage,$data];
     }
 
     public function create(array $data, ?array $relations = null) : bool

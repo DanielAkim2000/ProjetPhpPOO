@@ -27,4 +27,9 @@ class Pays extends Model{
         <a href="/ECF/Pays/$this->pays_id" class="btn btn-primary w-25 m-auto">Voir</a>
         HTML;
     }
+
+    public function getNameForFiltre()
+    {
+        return $this->name;
+    }
 }

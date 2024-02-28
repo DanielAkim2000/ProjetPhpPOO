@@ -1,6 +1,8 @@
-<h1 class="text-center"><a href="Agents/Create" class="btn btn-success">Créer un nouvel agent</a> Administration des agents</h1>
+<h1 class="text-center mb-4">Administration des agents</h1>
 
-<table class="table w-75 m-auto text-center">
+<?php include(VIEWS.'filtre.php'); ?>
+
+<table id="table" class="table table-responsive w-75 m-auto text-center table-hover shadow-lg table-bordered mb-4 rounded-table table-rounded">
     <thead>
     <tr>
         <th scope="col">#</th>
@@ -16,17 +18,17 @@
     <tbody>
     <?php foreach($params['agents'] as $agent): ?>
         <tr>
-            <td><?= $agent->getId() ?></td>
-            <td><?= $agent->getHumainKgbInfo()->getHumain()->getFirstname() ?></td>
-            <td><?= $agent->getHumainKgbInfo()->getHumain()->getLastname() ?></td>
-            <td><?= $agent->getHumainKgbInfo()->getBirthday() ?></td>
-            <td><?= $agent->getCode() ?></td>
-            <td><?= $agent->getHumainKgbInfo()->getNationality()->getName() ?></td>
+            <th scope="row"><?= htmlspecialchars($agent->getId()) ?></th>
+            <td><?= htmlspecialchars($agent->getHumainKgbInfo()->getHumain()->getFirstname()) ?></td>
+            <td><?= htmlspecialchars($agent->getHumainKgbInfo()->getHumain()->getLastname()) ?></td>
+            <td><?= htmlspecialchars($agent->getHumainKgbInfo()->getBirthday()) ?></td>
+            <td><?= htmlspecialchars($agent->getCode()) ?></td>
+            <td><?= htmlspecialchars($agent->getHumainKgbInfo()->getNationality()->getName()) ?></td>
             <td>
                 <?php 
                     $specialities = array_map(
                         function($speciality) {
-                            return $speciality->getNameOfSpeciality();
+                            return  htmlspecialchars($speciality->getNameOfSpeciality());
                         },
                         $agent->getSpeciality()
                     );
@@ -34,12 +36,14 @@
                 ?>
             </td>
             <td>
-                <a href="Agents/Edit/<?= $agent->agent_id ?>" class="btn btn-warning w-100">Modifier</a>
-                <form action="Agents/Delete/<?= $agent->agent_id ?>" method="POST">
-                    <button type="submit" class="btn btn-danger w-100 mt-2" >Supprimer</button>
+                <a href="/ECF/Agents/Edit/<?= $agent->getId() ?>" class="btn btn-warning w-100">Modifier</a>
+                <form class="supp" action="/ECF/Agents/Delete/<?= $agent->getId() ?>/<?= $_SESSION['token'] ?>" method="POST">
+                    <button type="submit" class="btn btn-danger w-100 mt-1" >Supprimer</button>
                 </form>
             </td>
         </tr>
     <?php endforeach ?>
     </tbody>
 </table>
+<a href="/ECF/Agents/Create" class="btn btn-success d-block w-25 m-auto">Créer un nouvel agent</a>
+<?php include(VIEWS. 'pagination.php') ?>

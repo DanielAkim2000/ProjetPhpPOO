@@ -136,4 +136,29 @@ class Agents extends HumainofKgb{
 
         return $result;
     }
+
+    public function findByNationality(int $idpays)
+    {
+        return $this->query(
+            "
+            SELECT a.* FROM AGENTS a
+            INNER JOIN HUMAINOFKGB hk ON a.humainkgb_id = hk.humainkgb_id
+            WHERE hk.nationality_id = ?
+            ",
+            [$idpays]);
+    }
+
+    public function findByName(string $name)
+    {
+        return $this->query(
+            "
+            SELECT a.* FROM AGENTS a
+            INNER JOIN HUMAINOFKGB hk ON a.humainkgb_id = hk.humainkgb_id
+            INNER JOIN HUMAIN h ON h.humain_id = hk.humain_id
+            WHERE h.lastname LIKE ?
+            OR h.firstname LIKE ?
+            ",
+            [$name.'%',$name.'%']
+        );
+    }
 }
