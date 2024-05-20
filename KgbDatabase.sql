@@ -1,7 +1,3 @@
-CREATE DATABASE KgbDatabase;
-
-USE KgbDatabase;
-
 /*Creation des tables pour la Kgb DATABASE*/
 CREATE TABLE PAYS(
     pays_id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,

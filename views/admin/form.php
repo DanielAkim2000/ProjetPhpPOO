@@ -1,6 +1,6 @@
 <h1 class="text-center mb-4"><?php echo isset($params['admin'])?'Modifications des données de l\'admin numéro '.$params['admin']->getId() : 'Créer un nouvel admin'; ?></h1>
 
-<form id="formulaire" action="<?= isset($params['admin'])? "/ECF/Admin/Edit/{$params['admin']->getId()}/{$_SESSION['token']}" : "/ECF/Admin/Create/{$_SESSION['token']}" ?>" class="w-25 m-auto" method="POST">
+<form id="formulaire" action="<?= isset($params['admin'])? "/ECF/Admin/Edit/{$params['admin']->getId()}/{$_SESSION['token']}" : "/ECF/Admin/Create/{$_SESSION['token']}" ?>" class="w-style m-auto" method="POST">
     <div class="form-group mb-2">
         <label class="form-label"  for="firstname">Prénom:</label>
         <input name="firstname" type="text" class="form-control" value="<?= isset($params['admin'])? $params['admin']->getHumain()->getFirstname(): '' ?>">

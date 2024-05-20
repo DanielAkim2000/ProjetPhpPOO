@@ -1,6 +1,6 @@
 <h1 class="text-center mb-4"><?php echo isset($params['planque'])?'Modifications des données de la planque numéro '.$params['planque']->getId() : 'Créer une nouvel planque'; ?></h1>
 
-<form id="formulaire" action="<?= isset($params['planque'])? "/ECF/Planques/Edit/{$params['planque']->getId()}/{$_SESSION['token']}" : "/ECF/Planques/Create/{$_SESSION['token']}" ?>" class="w-25 m-auto" method="POST">
+<form id="formulaire" action="<?= isset($params['planque'])? "/ECF/Planques/Edit/{$params['planque']->getId()}/{$_SESSION['token']}" : "/ECF/Planques/Create/{$_SESSION['token']}" ?>" class="w-style m-auto" method="POST">
     <div class="form-group mb-2">
         <label class="form-label" for="code">Code de la planque:</label>
         <input type="text" class="form-control" name="code" value=<?= isset($params['planque'])? $params['planque']->getCode() : '' ?>>

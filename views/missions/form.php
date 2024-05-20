@@ -1,6 +1,6 @@
 <h1 class="text-center mb-4"><?= isset($params['mission'])? "Modifications de la mission numéro {$params['mission']->getId()}" : "Création d'une nouvelle mission" ?> </h1>
 
-<form id="formulaire" action=<?= isset($params['mission'])? "/ECF/Missions/Edit/{$params['mission']->getId()}/{$_SESSION['token']}" : "/ECF/Missions/Create/{$_SESSION['token']}" ?> class="w-25 m-auto" method="post">
+<form id="formulaire" action=<?= isset($params['mission'])? "/ECF/Missions/Edit/{$params['mission']->getId()}/{$_SESSION['token']}" : "/ECF/Missions/Create/{$_SESSION['token']}" ?> class="w-style m-auto" method="post">
     <div class="form-group mb-2">
         <label class="form-label"  for="titre">Titre:</label>
         <input name="titre" type="text" class="form-control" value="<?= isset($params['mission'])? $params['mission']->getTitre() : "" ?>">

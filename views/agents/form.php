@@ -1,6 +1,6 @@
 <h1 class="text-center mb-4"><?php echo isset($params['agent'])?'Modifications des données de l\'agent numéro '.$params['agent']->getId() : 'Créer un nouvel agent'; ?></h1>
 
-<form id="formulaire" action="<?= isset($params['agent'])? "/ECF/Agents/Edit/{$params['agent']->getId()}/{$_SESSION['token']}" : "/ECF/Agents/Create/{$_SESSION['token']}" ?>" class="w-25 m-auto" method="POST">
+<form id="formulaire" action="<?= isset($params['agent'])? "/ECF/Agents/Edit/{$params['agent']->getId()}/{$_SESSION['token']}" : "/ECF/Agents/Create/{$_SESSION['token']}" ?>" class="w-style m-auto" method="POST">
     <div class="form-group mb-2">
         <label class="form-label" for="codeofidentification">Code:</label>
         <input name="codeofidentification" type="text" class="form-control" value=<?= isset($params['agent'])? $params['agent']->getCode(): '' ?>>

@@ -1,7 +1,7 @@
 <nav class="navbar navbar-dark navbar-expand-lg border-bottom position-fixed header fixed-top w-100">
     <div class="container-fluid">
         <a class="navbar-brand" href="/ECF">
-            <img src="<?= SCRIPTS. 'assets' . DIRECTORY_SEPARATOR . 'kgblogonoir.jpeg' ?>" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
+            <img class="image" src="<?= SCRIPTS. 'assets' . DIRECTORY_SEPARATOR . 'kgblogonoir.jpeg' ?>" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
         KGB
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">

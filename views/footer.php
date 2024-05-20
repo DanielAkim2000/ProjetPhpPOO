@@ -9,10 +9,10 @@
     <ul class="nav col-md-4 justify-content-end p-2">
       <li class="nav-item"><a href="/ECF/" class="nav-link px-2 text-muted">Page d'accueil</a></li>
       <?php if(isset($_SESSION['auth'])) : ?>
-        <li class="nav-item"><a href="/ECF/Agents" class="nav-link px-2 text-muted">Agents</a></li>
-        <li class="nav-item"><a href="/ECF/Cibles" class="nav-link px-2 text-muted">Cibles</a></li>
-        <li class="nav-item"><a href="/ECF/Contacts" class="nav-link px-2 text-muted">Contacts</a></li>
-        <li class="nav-item"><a href="/ECF/Missions" class="nav-link px-2 text-muted">Missions</a></li>
+        <li class="nav-item"><a href="/ECF/Agents/1" class="nav-link px-2 text-muted">Agents</a></li>
+        <li class="nav-item"><a href="/ECF/Cibles/1" class="nav-link px-2 text-muted">Cibles</a></li>
+        <li class="nav-item"><a href="/ECF/Contacts/1" class="nav-link px-2 text-muted">Contacts</a></li>
+        <li class="nav-item"><a href="/ECF/Missions/1" class="nav-link px-2 text-muted">Missions</a></li>
       <?php endif ?>
     </ul>
   </footer>

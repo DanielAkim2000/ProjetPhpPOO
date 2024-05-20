@@ -127,7 +127,7 @@ if(formSearch){
 
         console.log(url);
 
-        xhr.open("POST",url,true)
+        xhr.open("POST",url,true);
         xhr.send(data);
 
         return false;

@@ -1,6 +1,6 @@
 <h1 class="text-center mb-4"><?php echo isset($params['contact'])?'Modifications des données du contact numéro '.$params['contact']->getId() : 'Créer un nouveau contact'; ?></h1>
 
-<form id="formulaire" action="<?= isset($params['contact'])? "/ECF/Contacts/Edit/{$params['contact']->getId()}/{$_SESSION['token']}" : "/ECF/Contacts/Create/{$_SESSION['token']}" ?>" class="w-25 m-auto" method="POST">
+<form id="formulaire" action="<?= isset($params['contact'])? "/ECF/Contacts/Edit/{$params['contact']->getId()}/{$_SESSION['token']}" : "/ECF/Contacts/Create/{$_SESSION['token']}" ?>" class="w-style m-auto" method="POST">
     <div class="form-group mb-2">
         <label class="form-label" for="codename">Nom de code:</label>
         <input name="codename" type="text" class="form-control" value="<?= isset($params['contact'])? $params['contact']->getCodeName() : ''?>">

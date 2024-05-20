@@ -1,6 +1,6 @@
 <h1 class="text-center mb-4"><?php echo isset($params['cible'])?'Modifications des données de la cible numéro '.$params['cible']->getId() : 'Créer une nouvelle cible'; ?></h1>
 
-<form id="formulaire" action="<?= isset($params['cible'])? "/ECF/Cibles/Edit/{$params['cible']->getId()}/{$_SESSION['token']}" : "/ECF/Cibles/Create/{$_SESSION['token']}" ?>" class="w-25 m-auto" method="POST">
+<form id="formulaire" action="<?= isset($params['cible'])? "/ECF/Cibles/Edit/{$params['cible']->getId()}/{$_SESSION['token']}" : "/ECF/Cibles/Create/{$_SESSION['token']}" ?>" class="w-style m-auto" method="POST">
     <div class="form-group mb-2">
         <label class="form-label" for="codename">Nom de code:</label>
         <input name="codename" type="text" class="form-control" value="<?= isset($params['cible'])? $params['cible']->getCodeName() : ''?>">

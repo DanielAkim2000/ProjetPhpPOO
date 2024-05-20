@@ -21,4 +21,4 @@
     <?php endforeach ?>
 </div>
 
-<?php include(VIEWS.'pagination.php');
+<?php include(VIEWS.'pagination.php'); ?>
